@@ -28,10 +28,10 @@ app.get('/docs', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log('');
     console.log(
-        '\x1b[32m%s\x1b[0m',
-        `Server is running on http://localhost:${PORT}`
+        '\x1b[32m%s\x1b[34m%s\x1b[32m%s\x1b[0m',
+        'Server is running on ',
+        `http://localhost:${PORT}`,
+        ''
     );
-    console.log('');
 });

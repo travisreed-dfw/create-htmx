@@ -75,8 +75,22 @@ function updatePackageJson(projectPath, projectName) {
     fs.writeFileSync(packageJsonPath, updatedPackageJson);
 }
 
+function updateIndexHtml(projectPath, projectName) {
+    const indexHtmlPath = path.join(projectPath, 'public', 'index.html');
+    const indexHtmlTemplate = fs.readFileSync(
+        path.join(__dirname, 'template', 'public', 'index.html'),
+        'utf8'
+    );
+    const updatedIndexHtml = indexHtmlTemplate.replace(
+        '{{PROJECT_NAME}}',
+        projectName
+    );
+    fs.writeFileSync(indexHtmlPath, updatedIndexHtml);
+}
+
 copyRecursiveSync(path.join(__dirname, 'template'), projectPath);
 updatePackageJson(projectPath, projectName);
+updateIndexHtml(projectPath, projectName);
 
 async function setupProject() {
     const htmxPath = path.join(projectPath, 'public', 'htmx.min.js');
