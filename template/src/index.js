@@ -23,7 +23,7 @@ app.post('/decrement', (req, res) => {
 
 app.get('/docs', (req, res) => {
     res.send(
-        'Check <a href="https://htmx.org/docs/">the docs</a> for more info!'
+        '<p>Check <a href="https://htmx.org/docs/">the docs</a> for more info!</p>'
     );
 });
 
