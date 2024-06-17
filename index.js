@@ -86,11 +86,16 @@ async function setupProject() {
     }
 
     execSync('npm install', { cwd: projectPath, stdio: 'inherit' });
-
-    console.log(`Project ${projectName} created successfully.`);
+    console.log('');
+    console.log(`Project ${projectName} created successfully!`);
+    console.log('');
     console.log(`Run the following commands to get started:`);
+    console.log('');
+    console.log('');
     console.log(`cd ${projectName}`);
     console.log(`npm start`);
+    console.log('');
+    console.log('');
 }
 
 setupProject();
