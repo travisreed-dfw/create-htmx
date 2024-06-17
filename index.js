@@ -8,14 +8,17 @@ const axios = require('axios');
 const projectName = process.argv[2];
 
 if (!projectName) {
-    console.error('Please provide a project name.');
+    console.error('\x1b[31m%s\x1b[0m', 'Please provide a project name.');
     process.exit(1);
 }
 
 const projectPath = path.join(process.cwd(), projectName);
 
 if (fs.existsSync(projectPath)) {
-    console.error(`Project directory ${projectName} already exists.`);
+    console.error(
+        '\x1b[31m%s\x1b[0m',
+        `Project directory ${projectName} already exists.`
+    );
     process.exit(1);
 }
 
@@ -79,22 +82,22 @@ async function setupProject() {
     const htmxPath = path.join(projectPath, 'public', 'htmx.min.js');
     try {
         await downloadHTMX(htmxPath);
-        console.log('HTMX downloaded successfully.');
+        console.log('\x1b[32m%s\x1b[0m', 'HTMX downloaded successfully.');
     } catch (error) {
-        console.error('Error downloading HTMX:', error);
+        console.error('\x1b[31m%s\x1b[0m', 'Error downloading HTMX:', error);
         process.exit(1);
     }
 
     execSync('npm install', { cwd: projectPath, stdio: 'inherit' });
     console.log('');
-    console.log(`Project ${projectName} created successfully!`);
-    console.log('');
+    console.log(
+        '\x1b[32m%s\x1b[0m',
+        `Project ${projectName} created successfully!`
+    );
     console.log(`Run the following commands to get started:`);
     console.log('');
-    console.log('');
-    console.log(`cd ${projectName}`);
-    console.log(`npm start`);
-    console.log('');
+    console.log('\x1b[34m%s\x1b[0m', `cd ${projectName}`);
+    console.log('\x1b[34m%s\x1b[0m', `npm start`);
     console.log('');
 }
 
