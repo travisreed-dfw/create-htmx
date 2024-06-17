@@ -1,20 +1,33 @@
 {
-    "name": "create-htmx",
-    "version": "1.0.0",
-    "description": "CLI to create a boilerplate HTMX app",
-    "main": "index.js",
+    "author": "Travis Reed",
     "bin": {
         "create-htmx": "./index.js"
     },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node src/index.js"
+    "bugs": {
+        "url": "https://github.com/travisreed-dfw/create-htmx/issues"
     },
-    "keywords": [],
-    "author": "Travis Reed",
-    "license": "MIT",
     "dependencies": {
         "axios": "^1.7.2",
         "express": "^4.19.2"
-    }
+    },
+    "description": "CLI to create a boilerplate HTMX app",
+    "homepage": "https://github.com/travisreed-dfw/create-htmx#readme",
+    "keywords": [
+        "htmx",
+        "htmx.org",
+        "create htmx",
+        "create htmx app"
+    ],
+    "license": "MIT",
+    "main": "index.js",
+    "name": "create-htmx",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/travisreed-dfw/create-htmx.git"
+    },
+    "scripts": {
+        "start": "node src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "version": "1.0.2"
 }
