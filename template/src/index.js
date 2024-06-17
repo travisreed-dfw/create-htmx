@@ -21,6 +21,12 @@ app.post('/decrement', (req, res) => {
     res.send(`<div id="counter">${counter}</div>`);
 });
 
+app.get('/docs', (req, res) => {
+    res.send(
+        'Check <a href="https://htmx.org/docs/">the docs</a> for more info!'
+    );
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
