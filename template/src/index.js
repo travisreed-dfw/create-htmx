@@ -22,7 +22,6 @@ app.post('/decrement', (req, res) => {
 });
 
 app.get('/docs', (req, res) => {
-    console.log('Testing /docs route');
     res.send(
         '<p>Check <a href="https://htmx.org/docs/">the docs</a> for more info!</p>'
     );
