@@ -1,10 +1,10 @@
 {
-    "name": "create-htmx-app",
+    "name": "create-htmx",
     "version": "1.0.0",
     "description": "CLI to create a boilerplate HTMX app",
     "main": "index.js",
     "bin": {
-        "create-htmx-app": "./index.js"
+        "create-htmx": "./index.js"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
