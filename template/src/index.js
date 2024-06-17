@@ -22,11 +22,14 @@ app.post('/decrement', (req, res) => {
 });
 
 app.get('/docs', (req, res) => {
+    console.log('Testing /docs route');
     res.send(
         '<p>Check <a href="https://htmx.org/docs/">the docs</a> for more info!</p>'
     );
 });
 
 app.listen(PORT, () => {
+    console.log('---');
     console.log(`Server is running on http://localhost:${PORT}`);
+    console.log('---');
 });
