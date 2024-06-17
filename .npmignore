@@ -1,0 +1,5 @@
+node_modules
+template/node_modules
+*.log
+.ds_store
+.DS_Store

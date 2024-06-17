@@ -1,0 +1,20 @@
+{
+    "name": "create-htmx-app",
+    "version": "1.0.0",
+    "description": "CLI to create a boilerplate HTMX app",
+    "main": "index.js",
+    "bin": {
+        "create-htmx-app": "./index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/index.js"
+    },
+    "keywords": [],
+    "author": "Travis Reed",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.7.2",
+        "express": "^4.19.2"
+    }
+}
