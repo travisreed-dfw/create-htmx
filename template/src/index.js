@@ -21,12 +21,14 @@ app.post('/decrement', (req, res) => {
     res.send(`<div id="counter">${counter}</div>`);
 });
 
+// Serve documentation link
 app.get('/docs', (req, res) => {
     res.send(
         '<p>Check <a href="https://htmx.org/docs/">the docs</a> for more info!</p>'
     );
 });
 
+// Start the server and log the port
 app.listen(PORT, () => {
     console.log(
         '\x1b[32m%s\x1b[34m%s\x1b[32m%s\x1b[0m',

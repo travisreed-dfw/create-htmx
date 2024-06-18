@@ -42,24 +42,33 @@ function copyRecursiveSync(src, dest) {
 }
 
 async function downloadHTMX(dest) {
-    const url = 'https://unpkg.com/htmx.org/dist/htmx.min.js';
-    const response = await axios.get(url, { responseType: 'stream' });
-    const writer = fs.createWriteStream(dest);
+    try {
+        const url = 'https://unpkg.com/htmx.org/dist/htmx.min.js';
+        const response = await axios.get(url, { responseType: 'stream' });
+        const writer = fs.createWriteStream(dest);
 
-    return new Promise((resolve, reject) => {
-        response.data.pipe(writer);
-        let error = null;
-        writer.on('error', (err) => {
-            error = err;
-            writer.close();
-            reject(err);
+        return new Promise((resolve, reject) => {
+            response.data.pipe(writer);
+            let error = null;
+            writer.on('error', (err) => {
+                error = err;
+                writer.close();
+                reject(err);
+            });
+            writer.on('close', () => {
+                if (!error) {
+                    resolve(true);
+                }
+            });
         });
-        writer.on('close', () => {
-            if (!error) {
-                resolve(true);
-            }
-        });
-    });
+    } catch (error) {
+        console.error(
+            '\x1b[31m%s\x1b[0m',
+            'Error downloading HTMX:',
+            error.message
+        );
+        process.exit(1);
+    }
 }
 
 function updatePackageJson(projectPath, projectName) {
@@ -81,10 +90,13 @@ function updateIndexHtml(projectPath, projectName) {
         path.join(__dirname, 'template', 'public', 'index.html'),
         'utf8'
     );
+
+    // Replace all instances of {{PROJECT_NAME}}
     const updatedIndexHtml = indexHtmlTemplate.replace(
-        '{{PROJECT_NAME}}',
+        /{{PROJECT_NAME}}/g,
         projectName
     );
+
     fs.writeFileSync(indexHtmlPath, updatedIndexHtml);
 }
 
@@ -94,25 +106,27 @@ updateIndexHtml(projectPath, projectName);
 
 async function setupProject() {
     const htmxPath = path.join(projectPath, 'public', 'htmx.min.js');
+    await downloadHTMX(htmxPath);
+
     try {
-        await downloadHTMX(htmxPath);
-        console.log('\x1b[32m%s\x1b[0m', 'HTMX downloaded successfully.');
+        execSync('npm install', { cwd: projectPath, stdio: 'inherit' });
+        console.log(
+            '\x1b[32m%s\x1b[0m',
+            `Project ${projectName} created successfully!`
+        );
+        console.log('Run the following commands to get started:');
+        console.log('');
+        console.log('\x1b[34m%s\x1b[0m', `cd ${projectName}`);
+        console.log('\x1b[34m%s\x1b[0m', `npm start`);
+        console.log('');
     } catch (error) {
-        console.error('\x1b[31m%s\x1b[0m', 'Error downloading HTMX:', error);
+        console.error(
+            '\x1b[31m%s\x1b[0m',
+            'Error setting up project:',
+            error.message
+        );
         process.exit(1);
     }
-
-    execSync('npm install', { cwd: projectPath, stdio: 'inherit' });
-    console.log('');
-    console.log(
-        '\x1b[32m%s\x1b[0m',
-        `Project ${projectName} created successfully!`
-    );
-    console.log(`Run the following commands to get started:`);
-    console.log('');
-    console.log('\x1b[34m%s\x1b[0m', `cd ${projectName}`);
-    console.log('\x1b[34m%s\x1b[0m', `npm start`);
-    console.log('');
 }
 
 setupProject();
